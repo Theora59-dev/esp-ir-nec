@@ -1,20 +1,20 @@
 [package]
-edition      = "2024"
-name         = "esp-ir-nec"
+edition = "2024"
+name = "esp-ir-nec"
 rust-version = "1.88"
-version      = "0.1.0"
-description  = "Récepteur de télécommande IR NEC pour ESP32 via RMT"
-repository   = "https://github.com/Theora59-dev/esp-ir-nec"
-license      = "MIT"
-keywords     = ["esp", "embedded", "no-std", "ir", "nec", "rmt"]
-categories   = ["embedded", "no-std"]
+version = "0.1.0"
+description = "Récepteur de télécommande IR NEC pour ESP32 via RMT"
+repository = "https://github.com/Theora59-dev/esp-ir-nec"
+license = "MIT"
+keywords = ["esp", "embedded", "no-std", "ir", "nec", "rmt"]
+categories = ["embedded", "no-std"]
 
 [lib]
 name = "esp_ir_nec"
 path = "./src/lib.rs"
 
 [features]
-default = []
+default = ["esp32s3", "unstable"]
 unstable = ["esp-hal/unstable"]
 rmt_support = []
 
@@ -30,7 +30,11 @@ esp32c61 = ["esp-hal/esp32c61", "rmt_support"]
 esp32h2 = ["esp-hal/esp32h2", "rmt_support"]
 
 [dependencies]
-esp-hal = { version = "~1.1.0", default-features = false }
+esp-hal = { version = "~1.1.0", default-features = false, features = ["rt"] }
+
+[dev-dependencies]
+esp-println = { version = "0.17", features = ["esp32s3"] }
+esp-bootloader-esp-idf = { version = "0.5.0", features = ["esp32s3"] }
 
 
 # For fine tuning these settings, please refer to https://doc.rust-lang.org/cargo/reference/profiles.html
@@ -40,7 +44,7 @@ esp-hal = { version = "~1.1.0", default-features = false }
 opt-level = "s"
 
 [profile.release]
-codegen-units = 1     # LLVM can perform better optimizations using a single thread
-debug         = 2     # prefer slower builds but better debugging experience
-lto           = 'fat'
-opt-level     = 's'
+codegen-units = 1 # LLVM can perform better optimizations using a single thread
+debug = 2         # prefer slower builds but better debugging experience
+lto = 'fat'
+opt-level = 's'
