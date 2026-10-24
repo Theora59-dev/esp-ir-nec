@@ -1,8 +1,8 @@
 #![no_std]
 #![no_main]
 
+use esp_ir_nec::IrReceiver;
 use esp_println::println;
-use test_ir::IrReceiver;
 
 esp_bootloader_esp_idf::esp_app_desc!();
 

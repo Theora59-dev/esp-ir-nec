@@ -2,7 +2,7 @@
 //!
 //! ```no_run
 //! use esp_hal::peripherals::Peripherals;
-//! use test_ir::IrReceiver;
+//! use esp_ir_nec::IrReceiver;
 //!
 //! let peripherals = Peripherals::take().unwrap();
 //! let mut remote = IrReceiver::new(peripherals.RMT, peripherals.GPIO5).unwrap();
